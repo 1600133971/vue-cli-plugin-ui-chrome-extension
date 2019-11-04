@@ -15,7 +15,7 @@ const generateManifest = (options, manifestPath) => {
   // Production build of manifest.json
   fs.writeFileSync(
     `${manifestPath}/manifest.production.json`,
-    JSON.stringify(manifestJson, null, 4),
+    JSON.stringify(manifestJson, null, 2),
     {
       encoding: "utf-8"
     }
@@ -25,7 +25,7 @@ const generateManifest = (options, manifestPath) => {
     "script-src 'self' 'unsafe-eval'; object-src 'self'";
   fs.writeFileSync(
     `${manifestPath}/manifest.development.json`,
-    JSON.stringify(manifestJson, null, 4),
+    JSON.stringify(manifestJson, null, 2),
     {
       encoding: "utf-8"
     }

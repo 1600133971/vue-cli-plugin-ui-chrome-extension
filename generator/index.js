@@ -9,10 +9,12 @@ module.exports = (api, options, rootOptions) => {
 
   const extPkg = {
     scripts: {
-      "build-watch": "vue-cli-service build-watch"
+      "build-watch": "vue-cli-service build-watch",
+      "analyze": "npm run build --report"
     },
     devDependencies: {
-      "copy-webpack-plugin": "^4.6.0"
+      "copy-webpack-plugin": "^4.6.0",
+      "zip-webpack-plugin": "^3.0.0"
     }
   };
   if (ext === "ts") {

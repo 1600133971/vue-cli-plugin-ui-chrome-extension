@@ -2,13 +2,13 @@ module.exports = [{
     name: "name",
     type: "input",
     message: "Name of the Chrome Extension?",
-    default: "chrome-ext"
+    default: "chrome-extension"
   },
   {
     name: "description",
     type: "input",
     message: "Description for the Chrome Extension?",
-    default: "chrome extension"
+    default: "chrome extension for ..."
   },
   {
     name: "version_no",
@@ -22,5 +22,47 @@ module.exports = [{
     message: "javascript or typescript?",
     choices: ["js", "ts"],
     default: "js"
+  },
+  {
+    name: "popup",
+    type: "list",
+    message: "yes or no?",
+    choices: ["yes", "no"],
+    default: "yes"
+  },
+  {
+    name: "options",
+    type: "list",
+    message: "yes or no?",
+    choices: ["yes", "no"],
+    default: "yes"
+  },
+  {
+    name: "icons",
+    type: "list",
+    message: "yes or no?",
+    choices: ["yes", "no"],
+    default: "no"
+  },
+  {
+    name: "element-ui",
+    type: "list",
+    message: "yes or no?",
+    choices: ["yes", "no"],
+    default: "no"
+  },
+  {
+    name: "zip dest",
+    type: "list",
+    message: "yes or no?",
+    choices: ["yes", "no"],
+    default: "no"
+  }},
+  {
+    name: "hot-reload",
+    type: "list",
+    message: "yes or no?",
+    choices: ["yes", "no"],
+    default: "no"
   }
 ];
