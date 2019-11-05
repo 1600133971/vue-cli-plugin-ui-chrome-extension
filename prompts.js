@@ -11,7 +11,7 @@ module.exports = [{
     default: "chrome extension for ..."
   },
   {
-    name: "version_no",
+    name: "version",
     type: "input",
     message: "Version for the Chrome Extension?",
     default: "0.0.1"
@@ -25,44 +25,44 @@ module.exports = [{
   },
   {
     name: "popup",
-    type: "list",
-    message: "yes or no?",
-    choices: ["yes", "no"],
-    default: "yes"
+    type: "confirm",
+    message: "popup page",
+    default: true
   },
   {
     name: "options",
-    type: "list",
-    message: "yes or no?",
-    choices: ["yes", "no"],
-    default: "yes"
+    type: "confirm",
+    message: "options page",
+    default: true
+  },
+  {
+    name: "csp",
+    type: "confirm",
+    message: "content security policy",
+    default: true
   },
   {
     name: "icons",
-    type: "list",
-    message: "yes or no?",
-    choices: ["yes", "no"],
-    default: "no"
+    type: "confirm",
+    message: "icons",
+    default: false
   },
   {
-    name: "element-ui",
-    type: "list",
-    message: "yes or no?",
-    choices: ["yes", "no"],
-    default: "no"
+    name: "elementui",
+    type: "confirm",
+    message: "element-ui",
+    default: false
   },
   {
-    name: "zip dest",
-    type: "list",
-    message: "yes or no?",
-    choices: ["yes", "no"],
-    default: "no"
-  }},
+    name: "zip",
+    type: "confirm",
+    message: "zip dest",
+    default: false
+  },
   {
-    name: "hot-reload",
-    type: "list",
-    message: "yes or no?",
-    choices: ["yes", "no"],
-    default: "no"
+    name: "hotreload",
+    type: "confirm",
+    message: "hotreload",
+    default: false
   }
 ];
