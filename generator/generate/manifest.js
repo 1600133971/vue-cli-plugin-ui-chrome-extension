@@ -8,12 +8,12 @@ const generateManifest = (options, manifestPath) => {
     version
   };
 
-  if (options.popup) {
+  if (options.options) {
     manifestJson["options_page"] =
       "options.html";
   }
 
-  if (options.options) {
+  if (options.browser) {
     manifestJson["browser_action"] = {
       default_popup: "popup.html"
     };
