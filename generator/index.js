@@ -1,33 +1,65 @@
 const generateManifest = require("./generate/manifest");
+const deleteRecursive = require("./generate/deleteRecursive");
 const path = require("path");
 
 module.exports = (api, options, rootOptions) => {
   const ext = options.script;
 
   // create file
-  api.render(`./template-${ext}`);
+  api.render(`./template-${ext}`, {
+    hasBackground: options.background,
+    hasPopup: options.browser || options.page,
+    hasOptions: options.options,
+    hasZip: options.zip,
+    hasIcons: options.icons,
+    hasReload: options.reload,
+    hasContext: options.context,
+    hasContent: options.content,
+    hasInject: options.web,
+    hasOverrides: options.overrides,
+    hasDevtools: options.devtools,
+    hasLang: options.lang !== "",
+  });
 
   const extPkg = {
     scripts: {
       "build-watch": "vue-cli-service build-watch",
       "analyze": "npm run build --report"
     },
+    dependencies: {
+    },
     devDependencies: {
       "copy-webpack-plugin": "^4.6.0",
-      "zip-webpack-plugin": "^3.0.0"
     }
   };
+
   if (ext === "ts") {
     extPkg.devDependencies = {
       ...extPkg.devDependencies,
       "@types/chrome": "^0.0.75"
     };
   }
+
+  if (options.zip) {
+    extPkg.devDependencies = {
+      ...extPkg.devDependencies,
+      "zip-webpack-plugin": "^3.0.0"
+    };
+  }
+
   api.extendPackage(extPkg);
 
   api.onCreateComplete(() => {
+    // delete nouse files and dir
+    if (options.delete) {
+      deleteRecursive(api.resolve("./public"))
+      deleteRecursive(api.resolve("./src/assets"))
+      deleteRecursive(api.resolve("./src/components"))
+      deleteRecursive(api.resolve("./src/App.vue"))
+      deleteRecursive(api.resolve("./src/main.js"))
+    }
+
     // add manifest.json to src file
-    const manifestPath = api.resolve("./src");
-    generateManifest(options, manifestPath);
+    generateManifest(options, api.resolve("./src"));
   });
 };

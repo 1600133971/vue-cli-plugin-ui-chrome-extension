@@ -8,17 +8,120 @@ const generateManifest = (options, manifestPath) => {
     version
   };
 
+  // icons
+  if (options.icons) {
+    manifestJson["icons"] = {
+      "16": "img/icon.png",
+      "48": "img/icon.png",
+      "128": "img/icon.png"
+    };
+  }
+
+  // background
+  if (options.background) {
+    manifestJson["background"] = {
+      "scripts": [
+        "background.js",
+        (options.reload && process.env.NODE_ENV !== 'production') ? "hot-reload.js" : "",
+        options.context ? "context-menu.js" : "",
+      ]
+    };
+  }
+
+  // browser_action
+  if (options.browser) {
+    manifestJson["browser_action"] = {
+      "default_icon": options.icons ? "img/icon.png" : "",
+      "default_title": "This is a Chrome demo!",
+      "default_popup": "popup.html"
+    };
+  }
+
+  // page_action
+  if (options.page) {
+    manifestJson["page_action"] = {
+      "default_icon": options.icons ? "img/icon.png" : "",
+      "default_title": "This is a Chrome demo!",
+      "default_popup": "popup.html"
+    };
+  }
+
+  // content_scripts
+  if (options.content) {
+    manifestJson["content_scripts"] = [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content-script.js"],
+        "run_at": "document_start"
+      }
+    ];
+  }
+
+  // permissions
+  if (options.permissions) {
+    manifestJson["permissions"] = [
+      "contextMenus",
+      "tabs",
+      "notifications",
+      "webRequest",
+      "webRequestBlocking",
+      "storage",
+      "http://*/*",
+      "https://*/*"
+    ];
+  }
+
+  // web_accessible_resources
+  if (options.web) {
+    manifestJson["web_accessible_resources"] = [
+      "inject.js"
+    ];
+  }
+
+  // homepage_url
+  if (options.url) {
+    manifestJson["homepage_url"] = "https://www.baidu.com";
+  }
+
+  // chrome_url_overrides
+  if (options.overrides) {
+    manifestJson["chrome_url_overrides"] = {
+      "newtab": "newtab.html"
+    };
+  }
+
+  // options_page
   if (options.options) {
     manifestJson["options_page"] =
       "options.html";
   }
 
-  if (options.browser) {
-    manifestJson["browser_action"] = {
-      default_popup: "popup.html"
+  // options_ui
+  if (options.optionsui) {
+    manifestJson["options_ui"] = {
+      "page": "options.html",
+      "chrome_style": true
     };
   }
 
+  // omnibox
+  if (options.omnibox) {
+    manifestJson["omnibox"] = {
+      "keyword" : "go"
+    };
+  }
+
+  // default_locale
+  if (options.lang) {
+    manifestJson["default_locale"] = "zh_CN";
+  }
+
+  // devtools_page
+  if (options.devtools) {
+    manifestJson["devtools_page"] = "devtools.html";
+  }
+
+  // content security policy
   if (options.csp) {
     manifestJson["content_security_policy"] =
       "script-src 'self' 'unsafe-eval'; object-src 'self'";
@@ -27,8 +130,7 @@ const generateManifest = (options, manifestPath) => {
   // Production build of manifest.json
   fs.writeFileSync(
     `${manifestPath}/manifest.production.json`,
-    JSON.stringify(manifestJson, null, 2),
-    {
+    JSON.stringify(manifestJson, null, 2), {
       encoding: "utf-8"
     }
   );
@@ -36,8 +138,7 @@ const generateManifest = (options, manifestPath) => {
   // Development build of manifest.json
   fs.writeFileSync(
     `${manifestPath}/manifest.development.json`,
-    JSON.stringify(manifestJson, null, 2),
-    {
+    JSON.stringify(manifestJson, null, 2), {
       encoding: "utf-8"
     }
   );

@@ -20,18 +20,24 @@ module.exports = [{
     message: 'Description for the Chrome Extension?',
     validate: input => !!input,
     group: 'Basic Options',
-    default: 'chrome extension for ...'
+    default: '__MSG_pluginDesc__'
   },
   {
     type: 'list',
     name: 'script',
     message: 'javascript or typescript?',
     choices: [
-      { name: 'javascript', value: 'js' },
-      { name: 'typescript', value: 'ts' }
+      { name: 'javascript', value: 'js' }
     ],
     group: 'Basic Options',
     default: 'js',
+  },
+  {
+    type: 'confirm',
+    name: 'delete',
+    message: 'delete no use files and dir',
+    group: 'Chrome Options',
+    default: false
   },
   {
     type: 'confirm',
@@ -77,7 +83,7 @@ module.exports = [{
   },
   {
     type: 'confirm',
-    name: 'war',
+    name: 'web',
     message: 'web accessible resources',
     group: 'Chrome Options',
     default: false
@@ -92,7 +98,7 @@ module.exports = [{
   },
   {
     type: 'confirm',
-    name: 'chromeurloverrides',
+    name: 'overrides',
     message: 'chrome url overrides',
     group: 'Chrome Options',
     default: false
@@ -145,7 +151,7 @@ module.exports = [{
   },
   {
     type: 'confirm',
-    name: 'elementui',
+    name: 'element',
     message: 'element-ui',
     group: 'Extend Options',
     default: false
@@ -158,9 +164,18 @@ module.exports = [{
     default: false
   },
   {
+    when: answers => answers.background,
     type: 'confirm',
-    name: 'hotreload',
+    name: 'reload',
     message: 'hot reload',
+    group: 'Extend Options',
+    default: false
+  },
+  {
+    when: answers => answers.background && answers.permissions,
+    type: 'confirm',
+    name: 'context',
+    message: 'context menu',
     group: 'Extend Options',
     default: false
   }
