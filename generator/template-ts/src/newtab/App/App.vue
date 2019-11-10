@@ -1,10 +1,10 @@
 <template>
   <div class="main_app">
-    <h1>Hello Devtools</h1>
+    <h1>Hello new tab</h1>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'app',
 }

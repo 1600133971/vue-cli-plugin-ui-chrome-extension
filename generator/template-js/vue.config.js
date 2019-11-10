@@ -81,15 +81,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 <%_ } _%>
 
-<%_ if (hasContext) { _%>
-  plugins.push(
-    CopyWebpackPlugin([{
-      from: path.resolve("src/context-menu.js"),
-      to: path.resolve("dist")
-    }])
-  )
-<%_ } _%>
-
 <%_ if (hasContent) { _%>
   plugins.push(
     CopyWebpackPlugin([{
@@ -127,10 +118,44 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = {
   pages: pagesObj,
   productionSourceMap: false,
+  <%_ if (!hasElement) { _%>
   configureWebpack: {
-    plugins: plugins
+    plugins: plugins,
   },
+  <%_ } else { _%>
+  configureWebpack: {
+    entry: {
+      'content': './src/content/index.js'
+    },
+    output: {
+      filename: 'js/[name].js'
+    },
+    plugins: plugins,
+  },
+  css: {
+    extract: {
+      filename: 'css/[name].css'
+    }
+  },
+  <%_ } _%>
+
   chainWebpack: config => {
+    <%_ if (hasElement) { _%>
+    // 处理字体文件名，去除hash值
+    const fontsRule = config.module.rule('fonts')
+
+    // 清除已有的所有 loader。
+    // 如果你不这样做，接下来的 loader 会附加在该规则现有的 loader 之后。
+    fontsRule.uses.clear()
+    fontsRule.test(/\.(woff2?|eot|ttf|otf)(\?.*)?$/i)
+      .use('url')
+      .loader('url-loader')
+      .options({
+        limit: 1000,
+        name: 'fonts/[name].[ext]'
+      })
+    <%_ } _%>
+    
     if (process.env.npm_config_report) {
       config
         .plugin('webpack-bundle-analyzer')

@@ -21,11 +21,17 @@ const generateManifest = (options, manifestPath) => {
   if (options.background) {
     manifestJson["background"] = {
       "scripts": [
-        "background.js",
-        (options.reload && process.env.NODE_ENV !== 'production') ? "hot-reload.js" : "",
-        options.context ? "context-menu.js" : "",
+        "background.js"
       ]
     };
+
+    if (options.reload && process.env.NODE_ENV !== 'production') {
+      manifestJson["background"] = {
+        "scripts": [
+          "background.js", "hot-reload.js"
+        ]
+      };
+    }
   }
 
   // browser_action

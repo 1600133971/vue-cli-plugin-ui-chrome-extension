@@ -19,6 +19,8 @@ module.exports = (api, options, rootOptions) => {
     hasOverrides: options.overrides,
     hasDevtools: options.devtools,
     hasLang: options.lang !== "",
+    hasBadge: options.badge,
+    hasElement: options.element,
   });
 
   const extPkg = {
@@ -44,6 +46,18 @@ module.exports = (api, options, rootOptions) => {
     extPkg.devDependencies = {
       ...extPkg.devDependencies,
       "zip-webpack-plugin": "^3.0.0"
+    };
+  }
+
+  if (options.element) {
+    extPkg.dependencies = {
+      ...extPkg.dependencies,
+      "element-ui": "^2.12.0"
+    };
+
+    extPkg.devDependencies = {
+      ...extPkg.devDependencies,
+      "babel-plugin-component": "^1.1.1"
     };
   }
 

@@ -1,7 +1,7 @@
 {
   "name": "vue-cli-plugin-ui-chrome-extension",
-  "version": "0.0.19",
-  "description": "generate chrome extension with vue.js",
+  "version": "0.0.24",
+  "description": "generate chrome extension with vue-cli 4.x ui",
   "author": "1600133971",
   "scripts": {},
   "dependencies": {},

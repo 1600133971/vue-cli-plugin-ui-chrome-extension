@@ -1,7 +1,7 @@
 module.exports = [{
     type: 'input',
     name: 'name',
-    message: 'Name of the Chrome Extension?',
+    message: 'Name of the Chrome Extension',
     validate: input => !!input,
     group: 'Basic Options',
     default: 'chrome-extension'
@@ -9,7 +9,7 @@ module.exports = [{
   {
     type: 'input',
     name: 'version',
-    message: 'Version for the Chrome Extension?',
+    message: 'Version for the Chrome Extension',
     validate: input => !!input,
     group: 'Basic Options',
     default: '0.0.1'
@@ -17,7 +17,7 @@ module.exports = [{
   {
     type: 'input',
     name: 'description',
-    message: 'Description for the Chrome Extension?',
+    message: 'Description for the Chrome Extension',
     validate: input => !!input,
     group: 'Basic Options',
     default: '__MSG_pluginDesc__'
@@ -25,9 +25,10 @@ module.exports = [{
   {
     type: 'list',
     name: 'script',
-    message: 'javascript or typescript?',
+    message: 'Vue UI(devtools,newtab,options,popup) use Javascript or Typescript',
     choices: [
-      { name: 'javascript', value: 'js' }
+      { name: 'Javascript', value: 'js' },
+      { name: 'Typescript', value: 'ts' }
     ],
     group: 'Basic Options',
     default: 'js',
@@ -35,42 +36,42 @@ module.exports = [{
   {
     type: 'confirm',
     name: 'delete',
-    message: 'delete no use files and dir',
+    message: 'Delete no use files(./src/App.vue,./src/main.js) and dir(./public,./src/assets,./src/components)',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'confirm',
     name: 'icons',
-    message: 'icons',
+    message: 'Icons use for icons, browser_action, page_action in manifest.json',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'confirm',
     name: 'background',
-    message: 'background page',
+    message: 'Background page for background, hot reload, badge, context-menu',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'confirm',
     name: 'browser',
-    message: 'browser action',
+    message: 'Add browser action for popup',
     group: 'Chrome Options',
     default: true
   },
   {
     type: 'confirm',
     name: 'page',
-    message: 'page action',
+    message: 'Add page action for popup',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'confirm',
     name: 'content',
-    message: 'content scripts',
+    message: 'Add content scripts for injected js',
     group: 'Chrome Options',
     default: false
   },
@@ -127,7 +128,7 @@ module.exports = [{
   {
     type: 'list',
     name: 'lang',
-    message: 'Choose the locale you want to load?',
+    message: 'Choose the locale you want to load',
     choices: [
       { name: 'zh_CN', value: 'zh_CN' },
       { name: 'en', value: 'en' }
@@ -138,7 +139,7 @@ module.exports = [{
   {
     type: 'confirm',
     name: 'devtools',
-    message: 'devtools page',
+    message: 'Add devtools page for Chrome extension',
     group: 'Chrome Options',
     default: false
   },
@@ -146,36 +147,44 @@ module.exports = [{
     type: 'confirm',
     name: 'csp',
     message: 'content security policy',
-    group: 'Extend Options',
+    group: 'Chrome Options',
     default: true
-  },
-  {
-    type: 'confirm',
-    name: 'element',
-    message: 'element-ui',
-    group: 'Extend Options',
-    default: false
-  },
-  {
-    type: 'confirm',
-    name: 'zip',
-    message: 'zip dest',
-    group: 'Extend Options',
-    default: false
   },
   {
     when: answers => answers.background,
     type: 'confirm',
     name: 'reload',
-    message: 'hot reload',
-    group: 'Extend Options',
+    message: 'Hot reload modifications for nonproduction version',
+    group: 'Background Options',
     default: false
   },
   {
     when: answers => answers.background && answers.permissions,
     type: 'confirm',
     name: 'context',
-    message: 'context menu',
+    message: 'Add context menu items',
+    group: 'Background Options',
+    default: false
+  },
+  {
+    when: answers => answers.background,
+    type: 'confirm',
+    name: 'badge',
+    message: 'Add badge options',
+    group: 'Background Options',
+    default: false
+  },
+  {
+    type: 'confirm',
+    name: 'element',
+    message: 'Add element-ui library',
+    group: 'Extend Options',
+    default: false
+  },
+  {
+    type: 'confirm',
+    name: 'zip',
+    message: 'Add zip dest options',
     group: 'Extend Options',
     default: false
   }
