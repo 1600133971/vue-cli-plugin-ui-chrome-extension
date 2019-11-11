@@ -30,6 +30,8 @@ This plugin is meant for using new project for chrome extensions. Tested on defa
 ## Current feature
 
 - Generate manifest.json
+- Generate icons
+- Generate background.js
 - Generate popup.html
 - Generate options.html
 - Emit file out

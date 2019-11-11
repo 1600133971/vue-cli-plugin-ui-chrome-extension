@@ -15,7 +15,7 @@ const chromeName = [
   "newtab",
 <%_ } _%>
 <%_ if (hasDevtools) { _%>
-  "devtools",
+  "mypanel",
 <%_ } _%>
 ];
 
@@ -39,6 +39,22 @@ const manifest =
 const plugins = [
   CopyWebpackPlugin([manifest])
 ]
+
+<%_ if (hasDevtools) { _%>
+plugins.push(
+  CopyWebpackPlugin([{
+    from: path.resolve("src/devtools.html"),
+    to: path.resolve("dist/devtools.html")
+  }])
+)
+
+plugins.push(
+  CopyWebpackPlugin([{
+    from: path.resolve("src/devtools.js"),
+    to: path.resolve("dist/devtools.js")
+  }])
+)
+<%_ } _%>
 
 <%_ if (hasBackground) { _%>
 plugins.push(

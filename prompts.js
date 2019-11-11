@@ -78,21 +78,21 @@ module.exports = [{
   {
     type: 'confirm',
     name: 'permissions',
-    message: 'permissions',
+    message: 'Permissions options(contextMenus, tabs, notifications, webRequest, webRequestBlocking, storage etc.)',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'confirm',
     name: 'web',
-    message: 'web accessible resources',
+    message: 'Web accessible resources eg. inject.js',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'input',
     name: 'url',
-    message: 'homepage url',
+    message: 'Homepage url for author eg. ad url',
     validate: input => !!input,
     group: 'Chrome Options',
     default: 'https://www.baidu.com'
@@ -100,28 +100,28 @@ module.exports = [{
   {
     type: 'confirm',
     name: 'overrides',
-    message: 'chrome url overrides',
+    message: 'Chrome url overrides support newtab for Chrome Browser',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'confirm',
     name: 'options',
-    message: 'options page',
+    message: 'Options page',
     group: 'Chrome Options',
     default: true
   },
   {
     type: 'confirm',
     name: 'optionsui',
-    message: 'options ui',
+    message: 'Options ui page',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'confirm',
     name: 'omnibox',
-    message: 'omnibox',
+    message: 'Omnibox search options',
     group: 'Chrome Options',
     default: false
   },
@@ -139,14 +139,14 @@ module.exports = [{
   {
     type: 'confirm',
     name: 'devtools',
-    message: 'Add devtools page for Chrome extension',
+    message: 'Add devtools page',
     group: 'Chrome Options',
     default: false
   },
   {
     type: 'confirm',
     name: 'csp',
-    message: 'content security policy',
+    message: 'Content security policy options',
     group: 'Chrome Options',
     default: true
   },
@@ -171,6 +171,14 @@ module.exports = [{
     type: 'confirm',
     name: 'badge',
     message: 'Add badge options',
+    group: 'Background Options',
+    default: false
+  },
+  {
+    when: answers => answers.background,
+    type: 'confirm',
+    name: 'rules',
+    message: 'Add rules options',
     group: 'Background Options',
     default: false
   },

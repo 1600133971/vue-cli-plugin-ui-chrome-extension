@@ -21,6 +21,7 @@ module.exports = (api, options, rootOptions) => {
     hasLang: options.lang !== "",
     hasBadge: options.badge,
     hasElement: options.element,
+    hasRules: options.rules,
   });
 
   const extPkg = {

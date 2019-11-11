@@ -1,6 +1,6 @@
 <template>
   <div class="main_app">
-    <h1>Hello Devtools</h1>
+    <h1>Hello Devtools - Mypanel</h1>
   </div>
 </template>
 

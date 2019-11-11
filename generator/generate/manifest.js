@@ -54,13 +54,17 @@ const generateManifest = (options, manifestPath) => {
 
   // content_scripts
   if (options.content) {
-    manifestJson["content_scripts"] = [
-      {
+    manifestJson["content_scripts"] = 
+      options.element ? [{
+        "matches": ["*://*.baidu.com/*"],
+        "css": ["css/content.css"],
+        "js": ["js/content.js"],
+        "run_at": "document_end"
+      }] : [{
         "matches": ["<all_urls>"],
         "js": ["content-script.js"],
         "run_at": "document_start"
-      }
-    ];
+      }];
   }
 
   // permissions
@@ -80,7 +84,8 @@ const generateManifest = (options, manifestPath) => {
   // web_accessible_resources
   if (options.web) {
     manifestJson["web_accessible_resources"] = [
-      "inject.js"
+      "inject.js",
+      options.element ? "fonts/*": "",
     ];
   }
 
