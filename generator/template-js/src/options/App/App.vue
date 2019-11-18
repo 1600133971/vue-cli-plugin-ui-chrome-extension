@@ -1,3 +1,4 @@
+<%_ if (hasOptions) { _%>
 <template>
   <div class="main_app">
     <h1>Hello Options</h1>
@@ -20,3 +21,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+<%_ } _%>

@@ -34,22 +34,44 @@ const generateManifest = (options, manifestPath) => {
     }
   }
 
+  // event-pages
+  if (options.event) {
+    manifestJson["background"] = {
+      "scripts": [
+        "event-page.js"
+      ],
+      "persistent": false
+    };
+  }
+
   // browser_action
   if (options.browser) {
     manifestJson["browser_action"] = {
-      "default_icon": options.icons ? "img/icon.png" : "",
       "default_title": "This is a Chrome demo!",
       "default_popup": "popup.html"
     };
+
+    if (options.icons) {
+      manifestJson["browser_action"] = {
+        ...manifestJson["browser_action"],
+        "default_icon": "img/icon.png"
+      }
+    }
   }
 
   // page_action
   if (options.page) {
     manifestJson["page_action"] = {
-      "default_icon": options.icons ? "img/icon.png" : "",
       "default_title": "This is a Chrome demo!",
       "default_popup": "popup.html"
     };
+
+    if (options.icons) {
+      manifestJson["page_action"] = {
+        ...manifestJson["page_action"],
+        "default_icon": "img/icon.png"
+      };
+    }
   }
 
   // content_scripts
@@ -79,14 +101,21 @@ const generateManifest = (options, manifestPath) => {
       "http://*/*",
       "https://*/*"
     ];
+
+    if (options.rules) {
+      manifestJson["permissions"].push("declarativeContent");
+    }
   }
 
   // web_accessible_resources
   if (options.web) {
     manifestJson["web_accessible_resources"] = [
-      "inject.js",
-      options.element ? "fonts/*": "",
+      "inject.js"
     ];
+
+    if (options.element) {
+      manifestJson["web_accessible_resources"].push("fonts/*")
+    }
   }
 
   // homepage_url

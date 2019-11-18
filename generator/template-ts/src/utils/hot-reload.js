@@ -1,3 +1,4 @@
+<%_ if (hasReload) { _%>
 // 代码来源：https://github.com/xpl/crx-hotreload/edit/master/hot-reload.js
 const filesInDirectory = dir => new Promise(resolve =>
   dir.createReader().readEntries(entries =>
@@ -42,3 +43,4 @@ window.chrome.management.getSelf(self => {
     window.chrome.runtime.getPackageDirectoryEntry(dir => watchChanges(dir))
   }
 })
+<%_ } _%>

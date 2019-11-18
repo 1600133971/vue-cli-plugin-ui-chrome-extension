@@ -22,6 +22,10 @@ module.exports = (api, options, rootOptions) => {
     hasBadge: options.badge,
     hasElement: options.element,
     hasRules: options.rules,
+    hasSidebar: options.sidebar,
+    hasEventPages: options.event,
+    hasOmnibox: options.omnibox,
+    hasNotification: options.notification,
   });
 
   const extPkg = {
@@ -59,6 +63,16 @@ module.exports = (api, options, rootOptions) => {
     extPkg.devDependencies = {
       ...extPkg.devDependencies,
       "babel-plugin-component": "^1.1.1"
+    };
+  }
+
+  if (api.hasPlugin('eslint')) {
+    extPkg.eslintConfig = {
+      "rules" : {
+        "no-undef": 0,
+        "no-unused-vars": 0,
+        "no-console": 0
+      }
     };
   }
 

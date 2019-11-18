@@ -47,7 +47,6 @@ plugins.push(
     to: path.resolve("dist/devtools.html")
   }])
 )
-
 plugins.push(
   CopyWebpackPlugin([{
     from: path.resolve("src/devtools.js"),
@@ -55,7 +54,6 @@ plugins.push(
   }])
 )
 <%_ } _%>
-
 <%_ if (hasBackground) { _%>
 plugins.push(
   CopyWebpackPlugin([{
@@ -64,7 +62,14 @@ plugins.push(
   }])
 )
 <%_ } _%>
-
+<%_ if (hasEventPages) { _%>
+plugins.push(
+  CopyWebpackPlugin([{
+    from: path.resolve("src/event-page.js"),
+    to: path.resolve("dist/event-page.js")
+  }])
+)
+<%_ } _%>
 <%_ if (hasIcons) { _%>
 plugins.push(
   CopyWebpackPlugin([{
@@ -73,7 +78,14 @@ plugins.push(
   }])
 )
 <%_ } _%>
-
+<%_ if (hasNotification) { _%>
+plugins.push(
+  CopyWebpackPlugin([{
+    from: path.resolve("src/img/sds.png"),
+    to: path.resolve("dist/img/sds.png")
+  }])
+)
+<%_ } _%>
 <%_ if (hasZip) { _%>
 if (process.env.NODE_ENV === 'production') {
   const ZipPlugin = require('zip-webpack-plugin')
@@ -85,7 +97,6 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 <%_ } _%>
-
 <%_ if (hasReload) { _%>
 if (process.env.NODE_ENV !== 'production') {
   plugins.push(
@@ -96,39 +107,35 @@ if (process.env.NODE_ENV !== 'production') {
   )
 }
 <%_ } _%>
-
 <%_ if (hasContent) { _%>
-  plugins.push(
-    CopyWebpackPlugin([{
-      from: path.resolve("src/content-script.js"),
-      to: path.resolve("dist")
-    }])
-  )
+plugins.push(
+  CopyWebpackPlugin([{
+    from: path.resolve("src/content-script.js"),
+    to: path.resolve("dist")
+  }])
+)
 <%_ } _%>
-
 <%_ if (hasInject) { _%>
-  plugins.push(
-    CopyWebpackPlugin([{
-      from: path.resolve("src/inject.js"),
-      to: path.resolve("dist")
-    }])
-  )
+plugins.push(
+  CopyWebpackPlugin([{
+    from: path.resolve("src/inject.js"),
+    to: path.resolve("dist")
+  }])
+)
 <%_ } _%>
-
 <%_ if (hasLang) { _%>
-  plugins.push(
-    CopyWebpackPlugin([{
-      from: path.resolve(`src/locales/en/messages.json`),
-      to: path.resolve(`dist/_locales/en/messages.json`)
-    }])
-  )
-
-  plugins.push(
-    CopyWebpackPlugin([{
-      from: path.resolve(`src/locales/zh_CN/messages.json`),
-      to: path.resolve(`dist/_locales/zh_CN/messages.json`)
-    }])
-  )
+plugins.push(
+  CopyWebpackPlugin([{
+    from: path.resolve(`src/locales/en/messages.json`),
+    to: path.resolve(`dist/_locales/en/messages.json`)
+  }])
+)
+plugins.push(
+  CopyWebpackPlugin([{
+    from: path.resolve(`src/locales/zh_CN/messages.json`),
+    to: path.resolve(`dist/_locales/zh_CN/messages.json`)
+  }])
+)
 <%_ } _%>
 
 module.exports = {

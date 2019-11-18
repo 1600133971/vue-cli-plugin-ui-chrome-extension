@@ -1,4 +1,6 @@
+<%_ if (hasLang) { _%>
 {
   "pluginDesc": {"message": "A simple chrome extension demo"},
   "helloWorld": {"message": "Hello World!"}
 }
+<%_ } _%>

@@ -1,3 +1,4 @@
+<%_ if (hasOptions) { _%>
 import Vue from "vue";
 import AppComponent from "./App/App.vue";
 
@@ -9,3 +10,4 @@ new Vue({
     return createElement(AppComponent);
   }
 });
+<%_ } _%>

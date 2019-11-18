@@ -37,7 +37,7 @@ module.exports = [{
     type: 'confirm',
     name: 'delete',
     message: 'Delete no use files(./src/App.vue,./src/main.js) and dir(./public,./src/assets,./src/components)',
-    group: 'Chrome Options',
+    group: 'Basic Options',
     default: false
   },
   {
@@ -48,9 +48,18 @@ module.exports = [{
     default: false
   },
   {
+    when: answers => !answers.event,
     type: 'confirm',
     name: 'background',
     message: 'Background page for background, hot reload, badge, context-menu',
+    group: 'Chrome Options',
+    default: false
+  },
+  {
+    when: answers => !answers.background,
+    type: 'confirm',
+    name: 'event',
+    message: 'Background page for event-pages',
     group: 'Chrome Options',
     default: false
   },
@@ -119,13 +128,6 @@ module.exports = [{
     default: false
   },
   {
-    type: 'confirm',
-    name: 'omnibox',
-    message: 'Omnibox search options',
-    group: 'Chrome Options',
-    default: false
-  },
-  {
     type: 'list',
     name: 'lang',
     message: 'Choose the locale you want to load',
@@ -153,6 +155,14 @@ module.exports = [{
   {
     when: answers => answers.background,
     type: 'confirm',
+    name: 'omnibox',
+    message: 'Omnibox search options',
+    group: 'Background Options',
+    default: false
+  },
+  {
+    when: answers => answers.background,
+    type: 'confirm',
     name: 'reload',
     message: 'Hot reload modifications for nonproduction version',
     group: 'Background Options',
@@ -167,19 +177,35 @@ module.exports = [{
     default: false
   },
   {
-    when: answers => answers.background,
-    type: 'confirm',
-    name: 'badge',
-    message: 'Add badge options',
-    group: 'Background Options',
-    default: false
-  },
-  {
-    when: answers => answers.background,
+    when: answers => answers.background && answers.permissions && answers.page,
     type: 'confirm',
     name: 'rules',
     message: 'Add rules options',
     group: 'Background Options',
+    default: false
+  },
+  {
+    when: answers => answers.devtools,
+    type: 'confirm',
+    name: 'sidebar',
+    message: 'Add sidebar options',
+    group: 'Devtools Options',
+    default: false
+  },
+  {
+    when: answers => answers.browser || answers.page,
+    type: 'confirm',
+    name: 'badge',
+    message: 'Add badge options',
+    group: 'Popup Options',
+    default: false
+  },
+  {
+    when: answers => answers.browser || answers.page,
+    type: 'confirm',
+    name: 'notification',
+    message: 'Add notification options',
+    group: 'Popup Options',
     default: false
   },
   {

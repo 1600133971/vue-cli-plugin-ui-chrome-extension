@@ -1,3 +1,4 @@
+<%_ if (hasPopup) { _%>
 <template>
 <%_ if (!hasElement) { _%>
   <div class="main_app">
@@ -22,6 +23,15 @@
     >
       {{'list content ' + o }}
     </div>
+    <div>
+      <%_ if (hasBadge) { _%>
+      <a href="#" id="show_badge" v-on:click="show_badge">Show badge</a>
+      <a href="#" id="hide_badge" v-on:click="hide_badge">Hide badge</a>
+      <%_ } _%>
+      <%_ if (hasNotification) { _%>
+      <a href="#" id="show_notification" v-on:click="show_notification">Show notification</a>
+      <%_ } _%>
+    </div>
   </el-card>
 <%_ } _%>
 </template>
@@ -29,6 +39,29 @@
 <script>
 export default {
   name: 'app',
+  methods: {
+    <%_ if (hasBadge) { _%>
+    show_badge: function (event) {
+      chrome.browserAction.setBadgeText({text: 'New'});
+      chrome.browserAction.setBadgeBackgroundColor({color: [255, 0, 0, 255]});
+    },
+    hide_badge: function (event) {
+      chrome.browserAction.setBadgeText({text: ''});
+      chrome.browserAction.setBadgeBackgroundColor({color: [0, 0, 0, 0]});
+    },
+    <%_ } _%>
+    <%_ if (hasNotification) { _%>
+    show_notification: function (event) {
+      chrome.notifications.create(null, {
+        type: 'image',
+        iconUrl: 'img/icon.png',
+        title: 'Wish',
+        message: 'Merry christmas!',
+        imageUrl: 'img/sds.png'
+      });
+    },
+    <%_ } _%>
+  }
 }
 </script>
 
@@ -46,5 +79,7 @@ export default {
 .box-card {
   width: 300px;
 }
+a {margin-right: 10px;}
 <%_ } _%>
 </style>
+<%_ } _%>
