@@ -1,0 +1,57 @@
+{
+  "org": {
+    "vue": {
+      "st": {
+        "chrome": {
+          "basic": {
+            "group": "基本选项",
+            "name": "Name of the Chrome Extension",
+            "version": "Version for the Chrome Extension",
+            "description": "Description for the Chrome Extension",
+            "script": "Vue UI(devtools,newtab,options,popup) use Javascript or Typescript",
+            "delete": "Delete no use files(./src/App.vue,./src/main.js) and dir(./public,./src/assets,./src/components)"
+          },
+          "chrome": {
+            "group": "谷歌选项",
+            "icons": "Icons use for icons, browser_action, page_action in manifest.json",
+            "background": "Background page for background, hot reload, badge, context-menu",
+            "event": "Background page for event-pages",
+            "browser": "Add browser action for popup",
+            "page": "Add page action for popup",
+            "content": "Add content scripts for injected js",
+            "permissions": "Permissions options(contextMenus, tabs, notifications, webRequest, webRequestBlocking, storage etc.)",
+            "web": "Web accessible resources eg. inject.js",
+            "url": "Homepage url for author eg. ad url",
+            "overrides": "Chrome url overrides support newtab for Chrome Browser",
+            "options": "Options page",
+            "optionsui": "Options ui page",
+            "lang": "Choose the locale you want to load",
+            "devtools": "Add devtools page",
+            "csp": "Content security policy options"
+          },
+          "background": {
+            "group": "背景页面选项",
+            "omnibox": "Omnibox search options",
+            "reload": "Hot reload modifications for nonproduction version",
+            "context": "Add context menu items",
+            "rules": "Add rules options"
+          },
+          "devtools": {
+            "group": "开发工具选项",
+            "sidebar": "Add sidebar options"
+          },
+          "popup": {
+            "group": "弹出页面选项",
+            "badge": "Add badge options",
+            "notification": "Add notification options"
+          },
+          "extend": {
+            "group": "扩展选项",
+            "element": "Add element-ui library",
+            "zip": "Add zip dest options"
+          }
+        }
+      }
+    }
+  }
+}
